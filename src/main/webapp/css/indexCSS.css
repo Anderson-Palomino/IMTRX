@@ -1,0 +1,129 @@
+/* Importación de la fuente "Bebas Neue" desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+body {
+    background-color: #18191F;
+}
+
+/* Estilos para la sección principal */
+main {
+    padding-top: 80px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para el banner principal */
+.bannerPrincipal {
+    width: 100%;
+    position: relative;
+    height: 600px;
+    
+}
+
+/* Estilos para el título principal */
+.tituloPrincipal {
+    color: #E5E7E9;
+    position: absolute;
+    font-size: 170px;
+    font-family: 'Bebas Neue', cursive;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 100px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+/* Estilos para la imagen de fondo del banner principal */
+.bannerPrincipal img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+}
+
+/* Estilos para la etiqueta de "Vendido" en la parte superior de las tarjetas de productos */
+.vendido-top {
+    text-align: center;
+    color: white;
+    padding-top: 30px;
+}
+
+/* Estilos para las tarjetas de productos en dispositivos móviles */
+.Vendido {
+    max-width: 1200px;
+    padding: 20px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.tab_header{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.tab_header label{
+    width: 50%;
+    text-align: center;
+}
+
+.tab_header .tab_btn{
+    width: 100px;
+    font-size: 20px;
+    font-weight: 600; /*Grosor de la letra*/
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.tab_header label.active{
+    background: #5499C7;
+}
+
+.contenidoProductos{
+    display: none;
+    animation: movimiento 0.5s ease;
+}
+
+@keyframes movimiento {
+    from{transform: translatey(50px);opacity: 0;}
+    to{transform: translatey(0px);opacity: 1;}
+}
+
+.contenidoProductos.active{
+    display: block;
+}
+
+@media (max-width:760px) {
+
+    /* Estilos para el banner principal */
+    .bannerPrincipal {
+        height: 330px;
+    }
+
+    /* Estilos para el título principal */
+    .tituloPrincipal {
+        font-size: 80px;
+        line-height: 70px;
+    }
+
+    .bannerPrincipal img {
+        width: 100%;
+        height: 330px;
+    }
+
+    /* Estilos para la etiqueta de "Vendido" en la parte superior de las tarjetas de productos */
+    .vendido-top {
+        font-size: 20px;
+    }
+
+}

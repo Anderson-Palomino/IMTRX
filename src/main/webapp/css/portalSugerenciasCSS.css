@@ -1,0 +1,96 @@
+/* Estilo para el cuerpo de la página */
+body {
+    background-color: #18191F;
+}
+
+/* Estilo para el contenedor del formulario */
+.containerPS {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 120px;
+    margin-bottom: 40px;
+}
+
+/* Estilo para el título del formulario */
+legend {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+    /* Color azul */
+}
+
+/* Estilo para los campos de entrada y textarea */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para el botón de enviar */
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Estilo para el botón de enviar al pasar el cursor */
+input[type="submit"]:hover {
+    background-color: #0056b3;
+    /* Color azul más oscuro al pasar el cursor */
+}
+
+/* Estilo para la etiqueta del campo de observaciones */
+label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    /* Color de texto gris oscuro */
+}
+
+/* Estilo para el campo de selección (select) */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para la leyenda del campo de selección */
+legend select {
+    font-size: 18px;
+    text-align: center;
+    color: #007bff;
+    /* Color azul para la leyenda del select */
+}
+
+/* Estilo para la etiqueta del campo de selección */
+select+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+    /* Color de texto gris oscuro */
+}
+
+@media (max-width:700px) {
+    .containerPS {
+        max-width: 470px;
+    }
+
+    legend {
+        font-size: 20px;
+    }
+}

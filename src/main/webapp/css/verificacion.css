@@ -1,0 +1,45 @@
+.verificacion-body {
+    font-family: Arial, sans-serif;
+    transition: background-color 1s ease;
+}
+
+/* Estilos específicos para el contenedor en la página de verificación */
+.verificacion-body .container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.verificacion-body .container span {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.verificacion-body form input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.verificacion-body form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.verificacion-body form input[type="submit"]:hover {
+    background-color: #0056b3;
+}

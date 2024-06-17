@@ -1,0 +1,170 @@
+/* Estilos para el pie de página */
+.footer {
+    padding: 20px 25px;
+    padding-bottom: 0;
+    background-color: #0E0E0E;
+    background-size: cover;
+    background-position: center;
+    background-attachment: no-repeat;
+    min-height: 250px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin-top: auto;                  /*Para que el footer se quede siempre abajo*/
+}
+
+/*Para que el footer se quede siempre abajo*/
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Estilos para el contenedor del pie de página */
+footer .containerFooter {
+    display: flex;
+    /* Establece el contenedor como flexible */
+    justify-content: center;
+    color: #fff;
+    /* Color de texto blanco para mejor visibilidad */
+    flex-wrap: wrap;
+}
+
+/* Estilos para la parte izquierda del pie de página */
+.col-left {
+    width: 40%;
+}
+
+/* Estilos para el logo y el texto de derechos de autor en el pie de página */
+.logo-and-copy {
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+/* Estilos para el logo en el pie de página */
+.logo-and-copy img {
+    width: 150px;
+    filter: invert(100%) sepia(0%) saturate(0%) brightness(100%) contrast(100%);
+}
+
+/* Estilos para el texto de derechos de autor en el pie de página */
+.col-left .copy {
+    margin: 10px;
+}
+
+/* Estilos para la lista de redes sociales en el pie de página */
+.social-media-list {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+}
+
+/* Estilos para los elementos de la lista de redes sociales en el pie de página */
+.social-media-list li {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+
+}
+
+/* Estilos para los enlaces de redes sociales en el pie de página */
+.social-media-list a {
+    text-decoration: none;
+    color: #111;
+    font-size: 20px;
+}
+
+/* Estilos al pasar el cursor sobre los elementos de la lista de redes sociales en el pie de página */
+.social-media-list li:hover {
+    background-color: #111;
+}
+
+/* Estilos al pasar el cursor sobre los enlaces de redes sociales en el pie de página */
+.social-media-list li:hover a {
+    color: #fff;
+}
+
+/* Estilos para la columna de enlaces en el pie de página */
+.col-right {
+    width: 60%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+/* Estilos para los títulos de los enlaces en el pie de página */
+.links-container h4 {
+    color: #5499C7 ;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+/* Estilos para los elementos de la lista de enlaces en el pie de página */
+.links-container li {
+    margin: 20px 0px;
+}
+
+/* Estilos para los enlaces en el pie de página */
+.links-container a {
+    color: #fff;
+    text-decoration: none;
+    transition: all, 0.3s;
+}
+
+/* Estilos al pasar el cursor sobre los enlaces en el pie de página */
+.links-container li:hover a {
+    color: #85C1E9;
+}
+
+@media (max-width:890px) {
+    .footer {
+        padding: 0;
+    }
+
+    footer .containerFooter {
+        flex-wrap: wrap-reverse;
+        flex-direction: column-reverse;
+        padding: auto;
+        gap: 10px;
+    }
+
+    .col-left {
+        width: auto;
+    }
+
+    .col-right {
+        width: auto;
+        flex-direction: column;
+    }
+
+    .links-container {
+        text-align: center;
+        padding-top: 15px;
+    }
+
+    .links-container h4 {
+        font-size: 17px;
+    }
+
+    .links-container li {
+        margin: 10px 0px;
+    }
+
+    .links-container a {
+        font-size: 17px;
+    }
+
+    /* Estilos para la lista de redes sociales en el pie de página */
+    .social-media-list {
+        padding: 15px 0px;
+    }
+
+    .logo-and-copy img {
+        width: 120px;
+    }
+}

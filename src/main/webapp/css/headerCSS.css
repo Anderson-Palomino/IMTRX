@@ -1,0 +1,243 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.containerHeader {
+    background-color: #fff;
+    width: 100%;
+    height: 80px;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+}
+
+.logoMenu {
+    position: absolute;
+    margin: 5px 50px;
+}
+
+.logoMenu img {
+    display: block;
+    width: 100%;
+    height: 70px;
+}
+
+.carrito {
+    display: block;
+    float: right;
+    margin-right: 50px;
+    color: black;
+}
+
+#carritologo {
+    font-size: 30px;
+    line-height: 80px;
+}
+
+#cuenta-carrito {
+    font-size: 15px;
+    background-color: #85C1E9;
+    border-radius: 100%;
+    display: inline-block;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1;
+    text-align: center;
+    line-height: 20px;
+}
+
+.navegador {
+    line-height: 80px;
+}
+
+.menu {
+    display: flex;
+    float: right;
+    position: relative;
+}
+
+.menu a {
+    color: black;
+    display: inline-block;
+    padding: 0 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fa-solid {
+    right: 20px;
+}
+
+.menu .submenu {
+    background-color: #fff;
+    box-shadow: 3px 10px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    position: absolute;
+    top: 80px; /* Ajustar según la altura de tu menú */
+    border-radius: 5px;
+    left: 0;
+    z-index: 1000;
+    min-width: 200px; /* Ancho mínimo para los submenús */
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li:hover > .submenu {
+    display: block;
+}
+
+.submenu li {
+    position: relative;
+}
+
+.submenu .submenu {
+    top: 0;
+    left: 100%;
+    margin-left: 1px;
+    min-width: 200px; /* Ancho mínimo para los sub-submenús */
+}
+
+.login {
+    float: right;
+    padding: 0px 20px;
+    line-height: 80px;
+}
+
+.login button {
+    font-size: 16px;
+    height: 20px;
+    width: 110px;
+    cursor: pointer;
+    border: 0;
+}
+
+.usuario {
+    text-align: center;
+    float: right;
+    line-height: 80px;
+    width: 150px;
+}
+
+.usuario a {
+    color: gray;
+    font-weight: 600;
+}
+
+.usuario .menuUsuario {
+    background-color: #fff;
+    box-shadow: 3px 10px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: none;
+}
+
+.usuario:hover .menuUsuario {
+    display: block;
+}
+
+.menu a:hover {
+    background: #5499C7;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.menu button:hover {
+    background: #5499C7;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.checkbtn {
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+@media (max-width: 965px) {
+    .logoMenu {
+        margin-left: 30px;
+    }
+
+    .menu {
+        position: fixed;
+        width: 100%;
+        height: auto;
+        background-color: #fff;
+        top: 80px;
+        display: block;
+        left: 100%;
+        transition: all 0.5s;
+        line-height: 63px;
+    }
+
+    .menu a {
+        width: 100%;
+        font-size: 18px;
+        padding: 0px;
+    }
+
+    .menu i {
+        right: 20px;
+        position: absolute;
+        font-size: 20px;
+        line-height: 63px;
+    }
+
+    .menu .buttom {
+        width: 150px;
+    }
+
+    .auth {
+        padding-right: 20px;
+        text-align: center;
+        margin: auto;
+    }
+
+    .checkbtn {
+        display: block;
+        float: right;
+        line-height: 80px;
+        font-size: 40px;
+        margin-right: 30px;
+        cursor: pointer;
+    }
+
+    .carrito {
+        float: right;
+        margin-right: 30px;
+    }
+
+    #check:checked ~ nav .menu {
+        left: 0;
+    }
+
+    .menu li:hover .submenu {
+        display: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .login {
+        display: flex;
+        flex-direction: column;
+        line-height: 0;
+        height: 80px;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .login button {
+        font-size: 16px;
+        width: 100px;
+    }
+}
+

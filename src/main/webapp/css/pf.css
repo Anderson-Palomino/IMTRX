@@ -1,0 +1,24 @@
+/* Estilo para el contenedor de preguntas frecuentes */
+.preguntas {
+    margin-top: 20px;
+}
+
+/* Estilo para cada pregunta */
+.pregunta {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el título de la pregunta */
+.pregunta .p {
+    font-weight: bold;
+}
+
+/* Estilo para la respuesta de la pregunta */
+.pregunta .res {
+    margin-top: 10px;
+}
+
