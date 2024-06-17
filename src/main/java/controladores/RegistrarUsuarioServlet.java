@@ -22,12 +22,11 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         String apellidos = request.getParameter("apellidos");
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
-         String dirrecion= request.getParameter("dirrecion");
-        String telefono= request.getParameter("telefono");
+
         EnviarCorreo ec = new EnviarCorreo();
         String code = ec.getRandom();
 
-        UsuarioDTO usuarioDTO = new UsuarioDTO(nombres, apellidos, correo, contrasena, code,dirrecion,telefono);
+        UsuarioDTO usuarioDTO = new UsuarioDTO(nombres, apellidos, correo, contrasena, code);
         boolean test = false;
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();

@@ -6,23 +6,18 @@ public class UsuarioDTO {
     private String apellidos;
     private String correo; 
     private String contrasena;
-    private String direccion;
-    private String telefono;
     private String code;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String nombres, String apellidos, String correo, String contrasena,String code,String direccion,String telefono) {
+    public UsuarioDTO(String nombres, String apellidos, String correo, String contrasena,String code) {
         
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
         this.contrasena = contrasena;
-        this.direccion=direccion;
-        this.telefono=telefono;
         this.code=code;
-        
     }
 
     public int getId() {
@@ -71,21 +66,5 @@ public class UsuarioDTO {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 }

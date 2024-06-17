@@ -27,14 +27,10 @@
                 <input class="controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su Nombre" value="${param.nombres}">
                 <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido" value="${param.apellidos}">
                 <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo" value="${param.correo}">
-                <input class="controls" type="text" name="dirrecion" id="dirrecion" placeholder="Ingrese su Dirrecion" value="${param.dirrecion}">
-                <input class="controls" type="text" name="telefono" id="telefono" placeholder="Ingrese su Telefono" value="${param.telefono}">
                 <input class="controls" type="password" name="contrasena" id="contrasena" placeholder="Ingrese su Contraseña">
-                
-                
                 <p>Estoy de acuerdo con <a href="#">Términos y Condiciones</a></p>
                 <input class="botons" type="submit" value="Registrar" name="registro">
-                <p><a class="buttom" href="${pageContext.request.contextPath}/vista/IngresarSesion.jsp">Ya tengo cuenta</a></p>
+                <p><a class="buttom" href="${pageContext.request.contextPath}/vista/Ingresar.jsp">Ya tengo cuenta</a></p>
             </section>
         </div>
     </form>

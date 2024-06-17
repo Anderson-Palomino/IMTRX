@@ -1,4 +1,4 @@
-package modelo.dao;
+package controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
