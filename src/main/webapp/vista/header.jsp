@@ -12,6 +12,16 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/Ionicons/css/ionicons.min.css">
     <link href="<%=request.getContextPath()%>/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .carrito {
+            display: flex;
+            align-items: center;
+        }
+        .carrito i {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
     <header class="containerHeader">
@@ -52,7 +62,6 @@
                 </li>
                 <li><a href="<%=request.getContextPath()%>/vista/Contactanos.jsp">Contactanos</a></li>
                 <li><a href="<%=request.getContextPath()%>/vista/Nosotros.jsp">Nosotros</a></li>
-                <li><a href="<%=request.getContextPath()%>/vista/VentanaCompras.jsp">Compras</a></li>
 
                 <% if (estaLogueado) { %>
                     <li><a href="#"><%= "Hola, " + usuario.getNombres() %></a></li>
@@ -61,11 +70,14 @@
                     <li><a href="<%=request.getContextPath()%>/vista/Registrarse.jsp">Registrese</a></li>
                     <li><a href="<%=request.getContextPath()%>/vista/IniciarSesion.jsp">Inicie Sesión</a></li>
                 <% } %>
+                <li class="carrito">
+                    <a href="<%=request.getContextPath()%>/vista/VentanaCarrito.jsp">
+                        <i class="fa fa-shopping-cart"></i> Carrito
+                    </a>
+                </li>
             </ul>
         </nav>
         <script src="<%=request.getContextPath()%>/js/menu.js"></script>
     </header>
 </body>
 </html>
-
-
