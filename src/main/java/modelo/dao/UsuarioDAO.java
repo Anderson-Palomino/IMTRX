@@ -16,7 +16,7 @@ public class UsuarioDAO {
 
     public UsuarioDTO validarUsuario(String correo, String contrasena) {
         UsuarioDTO usuario = null;
-        String sql = "SELECT id, nombres, apellidos, correo,direcion,telefono,contraseña, code FROM usuarios WHERE correo = ? AND contrasena = ?";
+        String sql = "SELECT idUsuario, nombre, apellidos, correo,direccion,telefono,contraseña, code FROM usuarios WHERE correo = ? AND contraseña = ?";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setString(1, correo);
@@ -24,19 +24,18 @@ public class UsuarioDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     usuario = new UsuarioDTO();
-                    usuario.setId(rs.getInt("id"));
-                    usuario.setNombres(rs.getString("nombres"));
+                    usuario.setId(rs.getInt("idUsuario"));
+                    usuario.setNombres(rs.getString("nombre"));
                     usuario.setApellidos(rs.getString("apellidos"));
                     usuario.setCorreo(rs.getString("correo"));
-                    usuario.setDireccion(rs.getString("direcion"));
-                    usuario.setContrasena(rs.getString("contrasena"));
-                    usuario.setTelefono(rs.getString("Telefono"));
+                    usuario.setDireccion(rs.getString("direccion"));
+                    usuario.setContrasena(rs.getString("contraseña"));
+                    usuario.setTelefono(rs.getString("telefono"));
                     usuario.setCode(rs.getString("code"));
-                   // if (esCorreoVerificado(usuario.getCode())) {
-                    //    System.out.println("El correo del usuario está verificado.");
-                  //  } else {
-                   //     System.out.println("El correo del usuario no está verificado.");
-                   // }
+                   if (!verificarCorreoVerificado(usuario.getCode())) {
+                    System.out.println("El correo electrónico del usuario no está verificado.");
+                    usuario = null;
+                }
                 }
             }
         } catch (SQLException e) {
@@ -49,7 +48,7 @@ public class UsuarioDAO {
        if (correoExiste(usuario.getCorreo())) {
           return false;
        }
-        String query = "INSERT INTO usuarios (nombres, apellidos, correo, contraseña,dirrecion,telefono,code) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO usuarios (nombre, apellidos, correo, contraseña,direccion,telefono,code) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conexion.prepareStatement(query)) {
             pstmt.setString(1, usuario.getNombres());
             pstmt.setString(2, usuario.getApellidos());
@@ -79,25 +78,35 @@ public class UsuarioDAO {
             return false;
         }
     }
-    public boolean esCorreoVerificado(String code) throws SQLException {
-        String sql = "SELECT correo_verificar FROM usuario WHERE code = ?";
-        boolean correoVerificado = false;
+  public boolean verificarCorreoVerificado(String code) throws SQLException {
+ String sql = "SELECT correo_verificado FROM usuarios WHERE code = ?";
+    boolean correoVerificado = false;
 
-        try (PreparedStatement pstmt = conexion.prepareStatement(sql)) {
-            pstmt.setString(1, code);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    correoVerificado = rs.getInt("correo_verificar") == 1;
-                } else {
-                    System.out.println("No se encontró el usuario con el código proporcionado.");
-                }
+    try (PreparedStatement pstmt = conexion.prepareStatement(sql)) {
+        pstmt.setString(1, code);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                correoVerificado = rs.getBoolean("correo_verificado");
+            } else {
+                System.out.println("No se encontró el usuario con el código proporcionado.");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
         }
-        return correoVerificado;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw e;
     }
+    return correoVerificado;
+}
+ public void actualizarCorreoVerificado() throws SQLException {
+    String sql = "UPDATE usuarios SET correo_verificado = CASE WHEN code > 0 THEN 1 ELSE 0 END";
+    try (PreparedStatement pstmt = conexion.prepareStatement(sql)) {
+        pstmt.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw e;
+    }
+} 
+  
 }
 
 
