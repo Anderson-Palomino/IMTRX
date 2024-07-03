@@ -1,5 +1,6 @@
 package controladores;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
@@ -20,58 +21,78 @@ public class SVPortalSugerencias extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Recibir parámetros del formulario
-        String tipoDocumento = request.getParameter("Documentos");
-        String nroDocumento = request.getParameter("NroDoc");
-        String primerNombre = request.getParameter("PrimerNombre");
-        String segundoNombre = request.getParameter("SegundoNombre");
-        String primerApellido = request.getParameter("PrimerApellido");
-        String segundoApellido = request.getParameter("SegundoApellido");
-        String celular = request.getParameter("Celular");
-        String correo = request.getParameter("Correo");
-        String observaciones = request.getParameter("Obs");
-        String pedidoConsumidor = request.getParameter("pedido_consumidor");
+        try {
+            // Recibir parámetros del formulario
+            String tipoDocumento = request.getParameter("Documentos");
+            String nroDocumento = request.getParameter("NroDoc");
+            String primerNombre = request.getParameter("PrimerNombre");
+            String segundoNombre = request.getParameter("SegundoNombre");
+            String primerApellido = request.getParameter("PrimerApellido");
+            String segundoApellido = request.getParameter("SegundoApellido");
+            String celular = request.getParameter("Celular");
+            String correo = request.getParameter("Correo");
+            String observaciones = request.getParameter("Obs");
+            String pedidoConsumidor = request.getParameter("pedido_consumidor");
 
-        // Manejo del archivo de imagen
-        Part imagenPart = request.getPart("imagen_reclamante");
-        byte[] imagen = null;
-        if (imagenPart != null && imagenPart.getSize() > 0) {
-            try (InputStream inputStream = imagenPart.getInputStream()) {
-                imagen = inputStream.readAllBytes();
+            // Manejo del archivo de imagen
+            Part imagenPart = request.getPart("imagen_reclamante");
+            byte[] imagen = null;
+            if (imagenPart != null && imagenPart.getSize() > 0) {
+                try (InputStream inputStream = imagenPart.getInputStream()) {
+                    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                    byte[] data = new byte[1024];
+                    int nRead;
+                    while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+                        buffer.write(data, 0, nRead);
+                    }
+                    buffer.flush();
+                    imagen = buffer.toByteArray();
+                }
             }
+
+            // Suponiendo que la fecha es el momento actual
+            Timestamp fecha = new Timestamp(System.currentTimeMillis());
+
+            // Crear el objeto DTO y establecer sus atributos
+            SugerenciaDTO sugerencia = new SugerenciaDTO();
+            sugerencia.setTipoDocumento(tipoDocumento);
+            sugerencia.setNroDocumento(nroDocumento);
+            sugerencia.setPrimerNombre(primerNombre);
+            sugerencia.setSegundoNombre(segundoNombre);
+            sugerencia.setPrimerApellido(primerApellido);
+            sugerencia.setSegundoApellido(segundoApellido);
+            sugerencia.setCelular(celular);
+            sugerencia.setCorreo(correo);
+            sugerencia.setObservaciones(observaciones);
+            sugerencia.setImagen(imagen);
+            sugerencia.setPedidoConsumidor(pedidoConsumidor);
+            sugerencia.setFecha(fecha);
+
+            // Insertar la sugerencia en la base de datos a través del DAO
+            SugerenciaDAO sugerenciaDAO = new SugerenciaDAO();
+            boolean exito = sugerenciaDAO.insertarSugerencia(sugerencia);
+
+            // Redirigir con mensaje basado en el resultado
+            String mensaje;
+            if (exito) {
+                mensaje = "Sugerencia registrada correctamente.";
+            } else {
+                mensaje = "Error al registrar la sugerencia.";
+            }
+            request.setAttribute("mensaje", mensaje);
+            request.getRequestDispatcher("/vista/PortalSugerencias.jsp").forward(request, response);
+
+        } catch (IllegalStateException | IOException | ServletException e) {
+            // Manejo de excepciones específicas relacionadas con la obtención del archivo
+            e.printStackTrace();
+            request.setAttribute("mensaje", "Error al procesar la sugerencia: " + e.getMessage());
+            request.getRequestDispatcher("/vista/PortalSugerencias.jsp").forward(request, response);
+        } catch (Exception e) {
+            // Manejo de cualquier otra excepción
+            e.printStackTrace();
+            request.setAttribute("mensaje", "Error inesperado al procesar la sugerencia: " + e.getMessage());
+            request.getRequestDispatcher("/vista/PortalSugerencias.jsp").forward(request, response);
         }
-
-        // Suponiendo que la fecha es el momento actual
-        Timestamp fecha = new Timestamp(System.currentTimeMillis());
-
-        // Crear el objeto DTO y establecer sus atributos
-        SugerenciaDTO sugerencia = new SugerenciaDTO();
-        sugerencia.setTipoDocumento(tipoDocumento);
-        sugerencia.setNroDocumento(nroDocumento);
-        sugerencia.setPrimerNombre(primerNombre);
-        sugerencia.setSegundoNombre(segundoNombre);
-        sugerencia.setPrimerApellido(primerApellido);
-        sugerencia.setSegundoApellido(segundoApellido);
-        sugerencia.setCelular(celular);
-        sugerencia.setCorreo(correo);
-        sugerencia.setObservaciones(observaciones);
-        sugerencia.setImagen(imagen);
-        sugerencia.setPedidoConsumidor(pedidoConsumidor);
-        sugerencia.setFecha(fecha);
-
-        // Insertar la sugerencia en la base de datos a través del DAO
-        SugerenciaDAO sugerenciaDAO = new SugerenciaDAO();
-        boolean exito = sugerenciaDAO.insertarSugerencia(sugerencia);
-
-        // Redirigir con mensaje basado en el resultado
-        String mensaje;
-        if (exito) {
-            mensaje = "Sugerencia registrada correctamente.";
-        } else {
-            mensaje = "Error al registrar la sugerencia.";
-        }
-        request.setAttribute("mensaje", mensaje);
-        request.getRequestDispatcher("/vista/PortalSugerencias.jsp").forward(request, response);
     }
 
     @Override
@@ -86,4 +107,3 @@ public class SVPortalSugerencias extends HttpServlet {
         processRequest(request, response);
     }
 }
-

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="modelo.dto.UsuarioDTO" %>
 <%
     UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
@@ -7,65 +7,53 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Tu página</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/Ionicons/css/ionicons.min.css">
-    <link href="<%=request.getContextPath()%>/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href="src\main\webapp\css\headerCSS.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <header class="containerHeader">
-        <a href="index.jsp" class="logoMenu">
-            <img src="<%=request.getContextPath()%>/img/Mgamatrix.png" alt="Logo"/>
-        </a>
-        <nav class="navegador">
-            <ul class="menu">
-                <li><a href="<%=request.getContextPath()%>/vista/index.jsp">Inicio</a></li>
-                <li>
-                    <a href="#">Ofrecemos <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="#">Componentes <i class="fas fa-chevron-right"></i></a>
-                            <ul class="submenu">
-                                <li><a href="<%=request.getContextPath()%>/SVAlmacenamiento">Almacenamiento</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVMonitores">Monitores</a></li>
-                                <li><a href="<%=request.getContextPath()%>/TecladoServlet">Teclado</a></li>
-                                <li><a href="<%=request.getContextPath()%>/MouseServlet">Mouse</a></li>
-                                <li><a href="<%=request.getContextPath()%>/AuricularesServlet">Auriculares</a></li>
-                                <li><a href="<%=request.getContextPath()%>/vista/ComponenteCases.jsp">Cases</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVPlacasMadre">Placas Madre</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVMemoriaram">Memoria RAM</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVProcesador">Procesador</a></li>
-                                <li><a href="<%=request.getContextPath()%>/vista/ComponenteTarjetasDeVideo.jsp">Tarjetas de video</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVCooler">Cooler</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Servicios <i class="fas fa-chevron-right"></i></a>
-                            <ul class="submenu">
-                                <li><a href="<%=request.getContextPath()%>/vista/VentanaServicioEnsamblaje.jsp">Ensamblaje</a></li>
-                                <li><a href="<%=request.getContextPath()%>/vista/VentanaServicio=Mantenimiento.jsp">Mantenimiento</a></li>
-                                <li><a href="<%=request.getContextPath()%>/vista/VentanaServicioInstalacionSO.jsp">Instalación de sistema operativo y drivers</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="<%=request.getContextPath()%>/vista/Contactanos.jsp">Contactanos</a></li>
-                <li><a href="<%=request.getContextPath()%>/vista/Nosotros.jsp">Nosotros</a></li>
-                <li><a href="<%=request.getContextPath()%>/vista/VentanaCompras.jsp">Compras</a></li>
 
-                <% if (estaLogueado) { %>
-                    <li><a href="#"><%= "Hola, " + usuario.getNombres() %></a></li>
-                    <li><a href="<%=request.getContextPath()%>/CerrarSesionServlet">Cerrar Sesión</a></li>
-                <% } else { %>
-                    <li><a href="<%=request.getContextPath()%>/vista/Registrarse.jsp">Registrese</a></li>
-                    <li><a href="<%=request.getContextPath()%>/vista/IniciarSesion.jsp">Inicie Sesión</a></li>
-                <% } %>
-            </ul>
-        </nav>
-        <script src="<%=request.getContextPath()%>/js/menu.js"></script>
-    </header>
+    <div class="navbar">
+        <div class="navbar-top">
+            <div class="navbar-logo">
+                <img src="../img/meg.png" alt="LOGO IMX">
+            </div>
+            <div class="navbar-search">
+                <input type="text" placeholder="BUSCAR.">
+                <button>
+                    <box-icon name='search-alt-2'></box-icon>
+                </button>
+            </div>
+            <div class="navbar-icons">
+                <a href="#"><box-icon name='user-circle'></box-icon><span>Inicia Sesión</span></a>
+                <a href="#"><box-icon name='package'></box-icon><span>Mis Pedidos</span></a>
+                <a href="#"><box-icon name='cart'></box-icon><span>0</span></a>
+            </div>
+        </div>
+        <div class="navbar-middle">
+            <a href="#">Categorías</a>
+            <a href="#" style="color: red;">Ofertas</a>
+            <a href="#">Campañas</a>
+            <a href="#">Marcas</a>
+            <a href="#">Distribuidores</a>
+            <a href="#">¿Qué Vas A Jugar?</a>
+            <a href="#">Contactanos</a>
+        </div>
+        <div class="navbar-bottom">
+            <a href="#">Nuevo Ingreso</a>
+            <a href="#">PC's Completas</a>
+            <a href="#">Laptops</a>
+            <a href="#">Nuestros Locales</a>
+            <a href="#">Modalidades De Pago</a>
+            <a href="#">Envíos A Provincia</a>
+            <a href="#">Delivery Lima</a>
+            <a href="#">Chatea Con Nosotros</a>
+        </div>
+    </div>
+
 </body>
 </html>
-
-
