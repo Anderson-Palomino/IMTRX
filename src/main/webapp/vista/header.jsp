@@ -16,7 +16,7 @@
     <link href="src\main\webapp\css\headerCSS.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-
+<!-- NUEVO HEADER, TOCA REMAPEAR LOS BOTONES -->
     <div class="navbar">
         <div class="navbar-top">
             <div class="navbar-logo">

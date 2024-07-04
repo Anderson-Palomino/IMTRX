@@ -1,8 +1,3 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo.dao;
 
 import java.sql.Connection;
@@ -11,239 +6,114 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.dto.*;
+import modelo.dto.ProductoDTO;
 import servicios.ConexionDB;
 
-/**
- *
- * @author ander
- */
 public class ProductosDAO {
 
-    Connection conexion;
-    ConexionDB cdb = new ConexionDB();
-    PreparedStatement ps;
-    ResultSet rs;
-    
-    public ProductoDTO listarId(int id){
-        String sql="select * from producto where idProducto="+id;
-        ProductoDTO p = new ProductoDTO();
-        try {
-            conexion=cdb.obtenerConexion();
-            ps=conexion.prepareStatement(sql);
-            rs=ps.executeQuery();
-            while(rs.next()){
-                p.setIdProducto(rs.getInt(1));
-                p.setNombre(rs.getString(2));
-                p.setImagen(rs.getString(3));
-                p.setDescripcion(rs.getString(4));
-                p.setPrecio(rs.getDouble(5));
-            }
-        } catch (Exception e) {
-        }
-        return p;
-    }
-    
-    public List listarPLM() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='placamadre'";
-
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
+    // Obtiene un producto por su ID
+    public ProductoDTO listarId(int id) {
+        String sql = "SELECT * FROM producto WHERE idProducto = ?";
+        ProductoDTO producto = null;
+        
+        try (Connection conexion = obtenerConexion();
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    producto = mapearProducto(rs);
+                }
             }
         } catch (SQLException e) {
+            e.printStackTrace(); // Mejorar esto con un logger en aplicaciones reales
         }
-        return p;
+        
+        return producto;
     }
-    public List listarCooler() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='cooler'";
 
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
+    // para resumir esto categorizar ademas de poder obtener los productos y mandarlos al jasper y que los retorne, es necesario refactorizar algunos modelos para que quede con el jasper y el chatbot
+    public List<ProductoDTO> listarPorCategoria(String categoria) {
+        String sql = "SELECT * FROM producto WHERE Categoria = ?";
+        List<ProductoDTO> productos = new ArrayList<>();
+        
+        try (Connection conexion = obtenerConexion();
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setString(1, categoria);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    productos.add(mapearProducto(rs));
+                }
             }
         } catch (SQLException e) {
+            e.printStackTrace(); 
         }
-        return p;
+        
+        return productos;
     }
 
-    public List listarMRAM() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='memoriaram'";
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
-            }
-        } catch (Exception e) {
-        }
-        return p;
+    public List<ProductoDTO> listarPLM() {
+        return listarPorCategoria("placamadre");
     }
 
-    public List listarAuriculares() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='auriculares'";
-
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
-            }
-        } catch (Exception e) {
-        }
-        return p;
+    public List<ProductoDTO> listarCooler() {
+        return listarPorCategoria("cooler");
     }
 
-    public List listarMouses() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='mouse'"; // Ajusta el nombre de la tabla según sea necesario
+    public List<ProductoDTO> listarMRAM() {
+        return listarPorCategoria("memoriaram");
+    }
 
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
+    public List<ProductoDTO> listarAuriculares() {
+        return listarPorCategoria("auriculares");
+    }
+
+    public List<ProductoDTO> listarMouses() {
+        return listarPorCategoria("mouse");
+    }
+
+    public List<ProductoDTO> listarTeclados() {
+        return listarPorCategoria("teclado");
+    }
+
+    public List<ProductoDTO> listarProsc() {
+        return listarPorCategoria("procesador");
+    }
+
+    public List<ProductoDTO> listarMonitores() {
+        return listarPorCategoria("monitores");
+    }
+
+    public List<ProductoDTO> listarAlmac() {
+        return listarPorCategoria("almacenamiento");
+    }
+
+    public List<ProductoDTO> obtenerCarrito() {
+        String sql = "SELECT * FROM producto WHERE enCarrito = 1"; 
+        List<ProductoDTO> productosCarrito = new ArrayList<>();
+        
+        try (Connection conexion = obtenerConexion();
+             PreparedStatement ps = conexion.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
+                productosCarrito.add(mapearProducto(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Añade manejo de excepciones adecuado
+            e.printStackTrace();
         }
-        return p;
+        return productosCarrito;
     }
-
-    public List listarTeclados() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='teclado'"; // Ajusta el nombre de la tabla según sea necesario
-
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Añade manejo de excepciones adecuado
-        }
-        return p;
+    private ProductoDTO mapearProducto(ResultSet rs) throws SQLException {
+        ProductoDTO producto = new ProductoDTO();
+        producto.setIdProducto(rs.getInt("idProducto"));
+        producto.setCategoria(rs.getString("Categoria"));
+        producto.setNombre(rs.getString("Nombre"));
+        producto.setImagen(rs.getString("Imagen"));
+        producto.setDescripcion(rs.getString("Descripcion"));
+        producto.setPrecio(rs.getDouble("Precio"));
+        return producto;
     }
-
-    public List listarProsc() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='procesador'";
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
-            }
-        } catch (Exception e) {
-        }
-        return p;
-    }
-
-    public List listarMonitores() {
-        List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='monitores'";
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
-            }
-        } catch (Exception e) {
-        }
-        return p;
-    }
-    public List listarAlmac(){
-       List<ProductoDTO> p = new ArrayList<>();
-        String SQL = "SELECT * FROM producto where Categoria='almacenamiento'";
-        try {
-            conexion = cdb.obtenerConexion();
-            ps = conexion.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductoDTO ai = new ProductoDTO();
-                ai.setIdProducto(rs.getInt(1));
-                ai.setCategoria(rs.getString(2));
-                ai.setNombre(rs.getString(3));
-                ai.setImagen(rs.getString(4));
-                ai.setDescripcion(rs.getString(5));
-                ai.setPrecio(rs.getDouble(6));
-                p.add(ai);
-            }
-        } catch (Exception e) {
-        }
-        return p;
+    private Connection obtenerConexion() throws SQLException {
+        ConexionDB cdb = new ConexionDB();
+        return cdb.obtenerConexion();
     }
 }
