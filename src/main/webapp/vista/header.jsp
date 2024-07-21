@@ -3,6 +3,10 @@
 <%
     UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
     boolean estaLogueado = usuario != null;
+    Integer contador = (Integer) request.getAttribute("contador");
+    if (contador == null) {
+        contador = 0; // Valor predeterminado si no hay productos en el carrito
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -72,7 +76,7 @@
                 <% } %>
                 <li class="carrito">
                     <a href="<%=request.getContextPath()%>/vista/Carrito.jsp">
-                        <i class="fa fa-shopping-cart"></i> Carrito(<%= request.getAttribute("contador") %>)
+                        <i class="fa fa-shopping-cart"></i>(<%= contador %>)
                     </a>
                 </li>
             </ul>
@@ -81,3 +85,4 @@
     </header>
 </body>
 </html>
+
