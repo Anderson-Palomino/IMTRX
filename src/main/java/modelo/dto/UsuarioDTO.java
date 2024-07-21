@@ -1,7 +1,7 @@
 package modelo.dto;
 
 public class UsuarioDTO {
-    private int id;
+    private int idUsuario;
     private String nombres;
     private String apellidos;
     private String correo; 
@@ -21,11 +21,11 @@ public class UsuarioDTO {
     }
 
     public int getId() {
-        return id;
+        return idUsuario;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idUsuario = id;
     }
 
     public String getNombres() {

@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tu página</title>
+    <title></title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/Ionicons/css/ionicons.min.css">
@@ -71,8 +71,8 @@
                     <li><a href="<%=request.getContextPath()%>/vista/IniciarSesion.jsp">Inicie Sesión</a></li>
                 <% } %>
                 <li class="carrito">
-                    <a href="<%=request.getContextPath()%>/vista/VentanaCarrito.jsp">
-                        <i class="fa fa-shopping-cart"></i> Carrito
+                    <a href="<%=request.getContextPath()%>/vista/Carrito.jsp">
+                        <i class="fa fa-shopping-cart"></i> Carrito(<%= request.getAttribute("contador") %>)
                     </a>
                 </li>
             </ul>

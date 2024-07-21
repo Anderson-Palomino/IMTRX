@@ -32,7 +32,7 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title">${p.getNombre()}</h5>
                                 <p class="card-text">S/.${p.getPrecio()}</p>
-                                <a href="#" class="btn btn-outline-info">Añadir al carrito</a>
+                                <a href="AuricularesServlet?accion=AgregarCarrito&id=${p.getIdProducto()}" class="btn btn-outline-info">Añadir al carrito</a>
                                 <a href="#" class="btn btn-danger">Comprar</a>
                             </div>
                         </div>

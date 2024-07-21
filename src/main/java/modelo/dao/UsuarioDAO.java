@@ -16,7 +16,7 @@ public class UsuarioDAO {
 
     public UsuarioDTO validarUsuario(String correo, String contrasena) {
         UsuarioDTO usuario = null;
-        String sql = "SELECT id, nombres, apellidos, correo, contrasena, code FROM usuarios WHERE correo = ? AND contrasena = ?";
+        String sql = "SELECT idUsuario, nombres, apellidos, correo, contrasena, code, correo_verificado FROM usuarios WHERE correo = ? AND contrasena = ?";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setString(1, correo);
@@ -24,7 +24,7 @@ public class UsuarioDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     usuario = new UsuarioDTO();
-                    usuario.setId(rs.getInt("id"));
+                    usuario.setId(rs.getInt("idUsuario"));
                     usuario.setNombres(rs.getString("nombres"));
                     usuario.setApellidos(rs.getString("apellidos"));
                     usuario.setCorreo(rs.getString("correo"));

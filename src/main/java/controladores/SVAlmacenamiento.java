@@ -22,7 +22,7 @@ public class SVAlmacenamiento extends HttpServlet {
         Almacenamiento = prodao.listarAlmac();
         switch (accion != null ? accion : "default") {
             case "AgregarCarrito":
-                int idp=Integer.parseInt(request.getParameter("id"));
+                int idp =Integer.parseInt(request.getParameter("id"));
                 break;
             case "accion2":
                 break;

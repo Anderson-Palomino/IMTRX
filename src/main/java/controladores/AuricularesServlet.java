@@ -51,7 +51,8 @@ public class AuricularesServlet extends HttpServlet {
                 car.setSubTotal(cantidad*p.getPrecio());
                 listaCarrito.add(car);
                 request.setAttribute("contador", listaCarrito.size());
-                request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
+                request.setAttribute("Auriculares", Auriculares);
+                request.getRequestDispatcher("./vista/ComponenteAuriculares.jsp").forward(request, response);
                 break;
             case "accion2":
                 // Lógica para accion2

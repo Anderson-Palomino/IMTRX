@@ -4,11 +4,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Libro de Reclamaciones</title>
-        <link href="../css/headerCSS.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/footerCSS.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/libroReclamacionesCSS.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=request.getContextPath()%>/css/headerCSS.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=request.getContextPath()%>/css/footerCSS.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=request.getContextPath()%>/css/libroReclamacionesCSS.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="icon" href="../img/favicon_2.png" />
+        <link rel="icon" href="<%=request.getContextPath()%>/img/favicon_2.png" />
     </head>
     <jsp:include page="header.jsp" />
     <body>
@@ -20,7 +20,7 @@
                 Dirección: Av. Angamos Oeste Nro. 120 Miraflores, Lima, Perú. <br>
                 Hora: 10:07 AM Fecha: 18/09/2024
             </p>
-            <form action="SVLibroReclamaciones" method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/RegistrarReclamacionServlet" method="post" enctype="multipart/form-data">
                 <h2>Identificación del consumidor reclamante</h2>
 
                 <div class="input-group">

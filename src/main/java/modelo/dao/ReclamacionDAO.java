@@ -9,7 +9,7 @@ import servicios.ConexionDB; // Suponiendo que tengas una clase para gestionar l
 public class ReclamacionDAO {
 
     // Método para insertar una nueva reclamación en la base de datos
-        private final String INSERT_SQL = "INSERT INTO reclamacion "
+        private final String INSERT_SQL = "INSERT INTO formreclamaciones "
                      + "(fecha, primer_nombre, segundo_nombre, apellido_paterno, apellido_materno, domicilio, "
                      + "departamento, provincia, distrito, dni, telefono, correo, menor, tipo_bien_contratado, "
                      + "monto_reclamo, tipo_reclamo, descripcion, imagen_reclamante, pedido_consumidor, respuesta_direccion) "

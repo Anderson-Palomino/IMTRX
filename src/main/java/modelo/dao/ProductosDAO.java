@@ -43,7 +43,6 @@ public class ProductosDAO {
         }
         return p;
     }
-    
     public List listarPLM() {
         List<ProductoDTO> p = new ArrayList<>();
         String SQL = "SELECT * FROM producto where Categoria='placamadre'";
