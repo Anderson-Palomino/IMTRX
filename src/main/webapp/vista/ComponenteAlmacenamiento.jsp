@@ -29,7 +29,7 @@
                             <div class="card-body text-center">
                                 <h4 class="card-title">${alm.getNombre()}</h4>
                                 <p class="card-text">S/.${alm.getPrecio()}</p>
-                                <a href="SVAlmacenamiento?accion=AgregarCarrito&id=${alm.getIdProducto()}" class="btn btn-outline-info">Añadir al carrito</a>
+                                <a href="SVProductos?accion=AgregarCarrito&id=${alm.getIdProducto()}" class="btn btn-outline-info">Añadir al carrito</a>
                                 <a href="#" class="btn btn-danger">Comprar</a>
                             </div>
                         </div>

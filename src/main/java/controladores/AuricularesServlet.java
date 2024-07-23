@@ -21,7 +21,7 @@ public class AuricularesServlet extends HttpServlet {
     int item;
     double totalPagar = 0;
     int cantidad = 1;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -32,7 +32,7 @@ public class AuricularesServlet extends HttpServlet {
         if (listaCarrito == null) {
             listaCarrito = new ArrayList<>();
         }
-        
+
         switch (accion != null ? accion : "default") {
             case "AgregarCarrito":
                 int idp = Integer.parseInt(request.getParameter("id"));
@@ -47,17 +47,24 @@ public class AuricularesServlet extends HttpServlet {
                 car.setSubTotal(cantidad * p.getPrecio());
                 listaCarrito.add(car);
                 session.setAttribute("listaCarrito", listaCarrito);
-                break;
-            case "accion2":
-                break;
+                session.setAttribute("contador", listaCarrito.size());
+                request.setAttribute("contador", listaCarrito.size());
+                request.setAttribute("Auriculares", Auriculares);
+                request.getRequestDispatcher("./vista/ComponenteAuriculares.jsp").forward(request, response);
+                return;
+            case "Carrito":
+                System.out.println("Entrando en el caso Carrito");
+                totalPagar = 0.0;
+                request.setAttribute("carrito", listaCarrito);
+                request.getRequestDispatcher("./vista/Carrito.jsp").forward(request, response);
+                return;
             case "default":
-                break;
+                session.setAttribute("contador", listaCarrito.size());
+                request.setAttribute("contador", listaCarrito.size());
+                request.setAttribute("Auriculares", Auriculares);
+                request.getRequestDispatcher("./vista/ComponenteAuriculares.jsp").forward(request, response);
+                return;
         }
-
-        session.setAttribute("contador", listaCarrito.size());
-        request.setAttribute("contador", listaCarrito.size());
-        request.setAttribute("Auriculares", Auriculares);
-        request.getRequestDispatcher("./vista/ComponenteAuriculares.jsp").forward(request, response);
     }
 
     @Override

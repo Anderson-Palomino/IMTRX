@@ -40,7 +40,7 @@
                                 <li><a href="<%=request.getContextPath()%>/SVMonitores">Monitores</a></li>
                                 <li><a href="<%=request.getContextPath()%>/TecladoServlet">Teclado</a></li>
                                 <li><a href="<%=request.getContextPath()%>/MouseServlet">Mouse</a></li>
-                                <li><a href="<%=request.getContextPath()%>/AuricularesServlet">Auriculares</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos">Auriculares</a></li>
                                 <li><a href="<%=request.getContextPath()%>/vista/ComponenteCases.jsp">Cases</a></li>
                                 <li><a href="<%=request.getContextPath()%>/SVPlacasMadre">Placas Madre</a></li>
                                 <li><a href="<%=request.getContextPath()%>/SVMemoriaram">Memoria RAM</a></li>
@@ -71,7 +71,7 @@
                 <% } %>
                 <li class="carrito">
                     <a href="<%=request.getContextPath()%>/vista/Carrito.jsp">
-                        <i class="fa fa-shopping-cart"></i>(<%= contador %>)
+                        <i class="fa fa-shopping-cart"></i>Carrito(<%= contador %>)
                     </a>
                 </li>
             </ul>

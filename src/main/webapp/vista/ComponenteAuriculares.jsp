@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Auriculares</title>
         <link href="<%=request.getContextPath()%>/css/headerCSS.css" rel="stylesheet" type="text/css"/>
         <link href="<%=request.getContextPath()%>/css/footerCSS.css" rel="stylesheet" type="text/css"/>
@@ -23,16 +23,19 @@
     </head>
     <jsp:include page="header.jsp" />
     <body>
+        <script>
+            console.log("dataproducto"+<%= request.getAttribute("productos") %>);
+        </script>
         <div class="container mt-5">
             <div class="row">
-                <c:forEach var="p" items="${Auriculares}">
+                <c:forEach var="p" items="${productos}">
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="${pageContext.request.contextPath}/img/${p.getImagen()}" class="card-img-top" alt="Auriculares">
+                            <img src="${pageContext.request.contextPath}/img/${p.imagen}" class="card-img-top" alt="Auriculares">
                             <div class="card-body text-center">
-                                <h5 class="card-title">${p.getNombre()}</h5>
-                                <p class="card-text">S/.${p.getPrecio()}</p>
-                                <a href="AuricularesServlet?accion=AgregarCarrito&id=${p.getIdProducto()}" class="btn btn-outline-info">Añadir al carrito</a>
+                                <h5 class="card-title">${p.nombre}</h5>
+                                <p class="card-text">S/.${p.precio}</p>
+                                <a href="SVProductos?accion=AgregarCarrito&id=${p.idProducto}&tipo=Auriculares" class="btn btn-outline-info">Añadir al carrito</a>
                                 <a href="#" class="btn btn-danger">Comprar</a>
                             </div>
                         </div>
