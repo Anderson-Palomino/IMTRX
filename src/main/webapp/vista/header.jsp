@@ -3,7 +3,7 @@
 <%
     UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
     boolean estaLogueado = usuario != null;
-    Integer contador = (Integer) request.getAttribute("contador");
+    Integer contador = (Integer) session.getAttribute("contador");
     if (contador == null) {
         contador = 0; // Valor predeterminado si no hay productos en el carrito
     }
@@ -11,35 +11,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Header</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bower_components/Ionicons/css/ionicons.min.css">
     <link href="<%=request.getContextPath()%>/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
-    <style>
-        .carrito {
-            display: flex;
-            align-items: center;
-        }
-        .carrito i {
-            font-size: 24px;
-            margin-right: 5px;
-        }
-    </style>
+    <link href="<%=request.getContextPath()%>/css/header.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <header class="containerHeader">
         <a href="index.jsp" class="logoMenu">
             <img src="<%=request.getContextPath()%>/img/Mgamatrix.png" alt="Logo"/>
         </a>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fa fa-bars"></i>
+        </label>
         <nav class="navegador">
             <ul class="menu">
                 <li><a href="<%=request.getContextPath()%>/vista/index.jsp">Inicio</a></li>
-                <li>
-                    <a href="#">Ofrecemos <i class="fas fa-chevron-down"></i></a>
+                <li class="submenuParent">
+                    <a href="#">Ofrecemos <i class="fa fa-chevron-down"></i></a>
                     <ul class="submenu">
-                        <li>
-                            <a href="#">Componentes <i class="fas fa-chevron-right"></i></a>
+                        <li class="submenuParent">
+                            <a href="#">Componentes <i class="fa fa-chevron-right"></i></a>
                             <ul class="submenu">
                                 <li><a href="<%=request.getContextPath()%>/SVAlmacenamiento">Almacenamiento</a></li>
                                 <li><a href="<%=request.getContextPath()%>/SVMonitores">Monitores</a></li>
@@ -54,8 +49,8 @@
                                 <li><a href="<%=request.getContextPath()%>/SVCooler">Cooler</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="#">Servicios <i class="fas fa-chevron-right"></i></a>
+                        <li class="submenuParent">
+                            <a href="#">Servicios <i class="fa fa-chevron-right"></i></a>
                             <ul class="submenu">
                                 <li><a href="<%=request.getContextPath()%>/vista/VentanaServicioEnsamblaje.jsp">Ensamblaje</a></li>
                                 <li><a href="<%=request.getContextPath()%>/vista/VentanaServicio=Mantenimiento.jsp">Mantenimiento</a></li>
@@ -85,4 +80,3 @@
     </header>
 </body>
 </html>
-
