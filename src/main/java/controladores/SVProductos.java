@@ -15,6 +15,7 @@ import modelo.dto.ProductoDTO;
 
 @WebServlet(name = "SVProductos", urlPatterns = {"/SVProductos"})
 public class SVProductos extends HttpServlet {
+
     ProductosDAO prodao = new ProductosDAO();
     List<ProductoDTO> productos = new ArrayList<>();
     int item;
@@ -32,13 +33,27 @@ public class SVProductos extends HttpServlet {
             if (listaCarrito == null) {
                 listaCarrito = new ArrayList<>();
             }
-            
-            if ("Auriculares".equalsIgnoreCase(tipoProducto)||tipoProducto==null) {
+
+            if ("Auriculares".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarAuriculares();
             } else if ("Almacenamiento".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarAlmac();
-            } else {
-                productos = new ArrayList<>(); // En caso de que el tipo de producto no esté definido
+            } else if ("Cooler".equalsIgnoreCase(tipoProducto)) {
+                productos = prodao.listarCooler();
+            } else if ("Memoriaram".equalsIgnoreCase(tipoProducto)) {
+                productos = prodao.listarMRAM();
+            } else if ("Mouse".equalsIgnoreCase(tipoProducto)) {
+                productos = prodao.listarMouses();
+            } else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
+                productos = prodao.listarPLM();
+            }else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
+                productos = prodao.listarProsc();
+            }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
+                productos = prodao.listarTeclados();
+            }else if ("Monitor".equalsIgnoreCase(tipoProducto)) {
+                productos = prodao.listarMonitores();
+            }else {
+                productos = new ArrayList<>();
             }
 
             switch (accion != null ? accion : "default") {
@@ -62,6 +77,20 @@ public class SVProductos extends HttpServlet {
                         request.getRequestDispatcher("/vista/ComponenteAuriculares.jsp").forward(request, response);
                     } else if ("Almacenamiento".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteAlmacenamiento.jsp").forward(request, response);
+                    } else if ("Cooler".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteCooler.jsp").forward(request, response);
+                    } else if ("Memoriaram".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteMemoriaram.jsp").forward(request, response);
+                    } else if ("Mouse".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteMouse.jsp").forward(request, response);
+                    }else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponentePlacaMadre.jsp").forward(request, response);
+                    }else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteProcesador.jsp").forward(request, response);
+                    }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteTeclado.jsp").forward(request, response);
+                    }else if ("Monitor".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/Monitores.jsp").forward(request, response);
                     }
                     return;
                 case "Carrito":
@@ -73,10 +102,24 @@ public class SVProductos extends HttpServlet {
                     session.setAttribute("contador", listaCarrito.size());
                     request.setAttribute("contador", listaCarrito.size());
                     request.setAttribute("productos", productos);
-                    if ("Auriculares".equalsIgnoreCase(tipoProducto)||tipoProducto==null) {
+                    if ("Auriculares".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteAuriculares.jsp").forward(request, response);
                     } else if ("Almacenamiento".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteAlmacenamiento.jsp").forward(request, response);
+                    } else if ("Cooler".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteCooler.jsp").forward(request, response);
+                    } else if ("Memoriaram".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteMemoriaram.jsp").forward(request, response);
+                    }else if ("Mouse".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteMouse.jsp").forward(request, response);
+                    }else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponentePlacaMadre.jsp").forward(request, response);
+                    }else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteProcesador.jsp").forward(request, response);
+                    }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/ComponenteTeclado.jsp").forward(request, response);
+                    }else if ("Monitor".equalsIgnoreCase(tipoProducto)) {
+                        request.getRequestDispatcher("/vista/Monitores.jsp").forward(request, response);
                     }
                     return;
             }

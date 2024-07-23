@@ -16,15 +16,15 @@
     <body>
         <div class="container mt-5">
             <div class="row">
-                <c:forEach var="p" items="${PlacaMadre}">
+                <c:forEach var="p" items="${productos}">
                     <div class="col-md-4 mb-4">
                         <div class="card">
                             <img src="${pageContext.request.contextPath}/img/${p.getImagen()}" 
-                                 class="card-img-top" alt="PlacaMadre">
+                                 class="card-img-top" alt="productos">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${p.getNombre()}</h5>
                                 <p class="card-text">S/.${p.getPrecio()}</p>
-                                <a href="#" class="btn btn-outline-info">Añadir al carrito</a>
+                                <a href="SVProductos?accion=AgregarCarrito&id=${p.idProducto}&tipo=Placamadre" class="btn btn-outline-info">Añadir al carrito</a>
                                 <a href="#" class="btn btn-danger">Comprar</a>
                             </div>
                         </div>

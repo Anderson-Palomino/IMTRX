@@ -36,17 +36,17 @@
                         <li class="submenuParent">
                             <a href="#">Componentes <i class="fa fa-chevron-right"></i></a>
                             <ul class="submenu">
-                                <li><a href="<%=request.getContextPath()%>/SVAlmacenamiento">Almacenamiento</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVMonitores">Monitores</a></li>
-                                <li><a href="<%=request.getContextPath()%>/TecladoServlet">Teclado</a></li>
-                                <li><a href="<%=request.getContextPath()%>/MouseServlet">Mouse</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVProductos">Auriculares</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Almacenamiento">Almacenamiento</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Monitores">Monitores</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Teclado">Teclado</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Mouse">Mouse</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Auriculares">Auriculares</a></li>
                                 <li><a href="<%=request.getContextPath()%>/vista/ComponenteCases.jsp">Cases</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVPlacasMadre">Placas Madre</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVMemoriaram">Memoria RAM</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVProcesador">Procesador</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Placamadre">Placas Madre</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Memoriaram">Memoria RAM</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Procesador">Procesador</a></li>
                                 <li><a href="<%=request.getContextPath()%>/vista/ComponenteTarjetasDeVideo.jsp">Tarjetas de video</a></li>
-                                <li><a href="<%=request.getContextPath()%>/SVCooler">Cooler</a></li>
+                                <li><a href="<%=request.getContextPath()%>/SVProductos?tipo=Cooler">Cooler</a></li>
                             </ul>
                         </li>
                         <li class="submenuParent">

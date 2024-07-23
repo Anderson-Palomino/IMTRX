@@ -22,14 +22,14 @@
     <body>
         <div class="container mt-5">
             <div class="row">
-                <c:forEach var="alm" items="${Almacenamiento}">
+                <c:forEach var="p" items="${productos}">
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="${pageContext.request.contextPath}/img/${alm.getImagen()}" class="card-img-top" alt="Almacenamiento">
+                            <img src="${pageContext.request.contextPath}/img/${p.getImagen()}" class="card-img-top" alt="productos">
                             <div class="card-body text-center">
-                                <h4 class="card-title">${alm.getNombre()}</h4>
-                                <p class="card-text">S/.${alm.getPrecio()}</p>
-                                <a href="SVProductos?accion=AgregarCarrito&id=${alm.getIdProducto()}" class="btn btn-outline-info">Añadir al carrito</a>
+                                <h4 class="card-title">${p.getNombre()}</h4>
+                                <p class="card-text">S/.${p.getPrecio()}</p>
+                                <a href="SVProductos?accion=AgregarCarrito&id=${p.idProducto}&tipo=Almacenamiento" class="btn btn-outline-info">Añadir al carrito</a>
                                 <a href="#" class="btn btn-danger">Comprar</a>
                             </div>
                         </div>

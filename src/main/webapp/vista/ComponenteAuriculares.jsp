@@ -31,7 +31,7 @@
                 <c:forEach var="p" items="${productos}">
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="${pageContext.request.contextPath}/img/${p.imagen}" class="card-img-top" alt="Auriculares">
+                            <img src="${pageContext.request.contextPath}/img/${p.imagen}" class="card-img-top" alt="productos">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${p.nombre}</h5>
                                 <p class="card-text">S/.${p.precio}</p>
