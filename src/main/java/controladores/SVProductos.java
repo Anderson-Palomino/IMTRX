@@ -50,7 +50,7 @@ public class SVProductos extends HttpServlet {
                 productos = prodao.listarProsc();
             }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarTeclados();
-            }else if ("Monitor".equalsIgnoreCase(tipoProducto)) {
+            }else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarMonitores();
             }else {
                 productos = new ArrayList<>();
@@ -89,7 +89,7 @@ public class SVProductos extends HttpServlet {
                         request.getRequestDispatcher("/vista/ComponenteProcesador.jsp").forward(request, response);
                     }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteTeclado.jsp").forward(request, response);
-                    }else if ("Monitor".equalsIgnoreCase(tipoProducto)) {
+                    }else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/Monitores.jsp").forward(request, response);
                     }
                     return;
@@ -118,7 +118,7 @@ public class SVProductos extends HttpServlet {
                         request.getRequestDispatcher("/vista/ComponenteProcesador.jsp").forward(request, response);
                     }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteTeclado.jsp").forward(request, response);
-                    }else if ("Monitor".equalsIgnoreCase(tipoProducto)) {
+                    }else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/Monitores.jsp").forward(request, response);
                     }
                     return;
