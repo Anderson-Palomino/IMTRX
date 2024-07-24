@@ -25,7 +25,7 @@
                                 <h5 class="card-title">${p.getNombre()}</h5>
                                 <p class="card-text">S/.${p.getPrecio()}</p>
                                 <a href="SVProductos?accion=AgregarCarrito&id=${p.idProducto}&tipo=Monitores" class="btn btn-outline-info">Añadir al carrito</a>
-                                <a href="#" class="btn btn-danger">Comprar</a>
+                                <a href="SVProductos?accion=Comprar&id=${p.idProducto}&tipo=Monitores" class="btn btn-danger">Comprar</a>
                             </div>
                         </div>
                     </div>

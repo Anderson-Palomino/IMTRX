@@ -34,10 +34,11 @@ public class ProductosDAO {
             rs=ps.executeQuery();
             while(rs.next()){
                 p.setIdProducto(rs.getInt(1));
-                p.setNombre(rs.getString(2));
-                p.setImagen(rs.getString(3));
-                p.setDescripcion(rs.getString(4));
-                p.setPrecio(rs.getDouble(5));
+                p.setCategoria(rs.getString(2));
+                p.setNombre(rs.getString(3));
+                p.setImagen(rs.getString(4));
+                p.setDescripcion(rs.getString(5));
+                p.setPrecio(rs.getDouble(6));
             }
         } catch (Exception e) {
         }

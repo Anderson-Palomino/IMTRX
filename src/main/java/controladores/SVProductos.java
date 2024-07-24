@@ -22,6 +22,9 @@ public class SVProductos extends HttpServlet {
     int item;
     double totalPagar = 0;
     int cantidad = 1;
+    int idp;
+    CarritoDTO car;
+    boolean productoExiste = false;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,29 +50,87 @@ public class SVProductos extends HttpServlet {
                 productos = prodao.listarMouses();
             } else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarPLM();
-            }else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
+            } else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarProsc();
-            }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
+            } else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarTeclados();
-            }else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
+            } else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
                 productos = prodao.listarMonitores();
-            }else {
+            } else {
                 productos = new ArrayList<>();
             }
 
             switch (accion != null ? accion : "default") {
-                case "AgregarCarrito":
-                    int idp = Integer.parseInt(request.getParameter("id"));
+                case "Comprar":
+                    totalPagar = 0.0;
+                    idp = Integer.parseInt(request.getParameter("id"));
                     p = prodao.listarId(idp);
-                    item = listaCarrito.size() + 1;
-                    CarritoDTO car = new CarritoDTO();
-                    car.setItem(item);
-                    car.setIdProducto(p.getIdProducto());
-                    car.setNombre(p.getNombre());
-                    car.setDescripcion(p.getDescripcion());
-                    car.setCantidad(cantidad);
-                    car.setSubTotal(cantidad * p.getPrecio());
-                    listaCarrito.add(car);
+                    productoExiste = false;
+
+                    // Verifica si el producto ya está en el carrito
+                    for (CarritoDTO carrito : listaCarrito) {
+                        if (carrito.getIdProducto() == p.getIdProducto()) {
+                            carrito.setCantidad(carrito.getCantidad() + cantidad);
+                            carrito.setSubTotal(carrito.getCantidad() * carrito.getPreciocompra());
+                            productoExiste = true;
+                            break;
+                        }
+                    }
+
+                    // Si no existe, agrégalo al carrito
+                    if (!productoExiste) {
+                        item = listaCarrito.size() + 1;
+                        CarritoDTO car = new CarritoDTO();
+                        car.setItem(item);
+                        car.setIdProducto(p.getIdProducto());
+                        car.setNombre(p.getNombre());
+                        car.setImagen(p.getImagen());
+                        car.setPreciocompra(p.getPrecio());
+                        car.setCantidad(cantidad);
+                        car.setSubTotal(cantidad * p.getPrecio());
+                        listaCarrito.add(car);
+                    }
+
+                    // Calcular el total
+                    totalPagar = listaCarrito.stream().mapToDouble(CarritoDTO::getSubTotal).sum();
+
+                    session.setAttribute("listaCarrito", listaCarrito);
+                    session.setAttribute("contador", listaCarrito.size());
+                    request.setAttribute("totalPagar", totalPagar);
+                    request.setAttribute("carrito", listaCarrito);  // Aquí debería ser la lista completa
+
+                    request.getRequestDispatcher("./vista/Carrito.jsp").forward(request, response);
+                    break;
+
+                case "AgregarCarrito":
+                    idp = Integer.parseInt(request.getParameter("id"));
+                    p = prodao.listarId(idp);
+                    productoExiste = false;
+
+                    // Verifica si el producto ya está en el carrito
+                    for (CarritoDTO carrito : listaCarrito) {
+                        if (carrito.getIdProducto() == p.getIdProducto()) {
+                            carrito.setCantidad(carrito.getCantidad() + cantidad);
+                            carrito.setSubTotal(carrito.getCantidad() * carrito.getPreciocompra());
+                            productoExiste = true;
+                            break;
+                        }
+                    }
+
+                    // Si no existe, agrégalo al carrito
+                    if (!productoExiste) {
+                        item = listaCarrito.size() + 1;
+                        CarritoDTO car = new CarritoDTO();
+                        car.setItem(item);
+                        car.setIdProducto(p.getIdProducto());
+                        car.setNombre(p.getNombre());
+                        car.setImagen(p.getImagen());
+                        car.setPreciocompra(p.getPrecio());
+                        car.setCantidad(cantidad);
+                        car.setSubTotal(cantidad * p.getPrecio());
+                        listaCarrito.add(car);
+                    }
+
                     session.setAttribute("listaCarrito", listaCarrito);
                     session.setAttribute("contador", listaCarrito.size());
                     request.setAttribute("contador", listaCarrito.size());
@@ -84,20 +145,24 @@ public class SVProductos extends HttpServlet {
                         request.getRequestDispatcher("/vista/ComponenteMemoriaram.jsp").forward(request, response);
                     } else if ("Mouse".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteMouse.jsp").forward(request, response);
-                    }else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponentePlacaMadre.jsp").forward(request, response);
-                    }else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteProcesador.jsp").forward(request, response);
-                    }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteTeclado.jsp").forward(request, response);
-                    }else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/Monitores.jsp").forward(request, response);
                     }
                     return;
                 case "Carrito":
                     totalPagar = 0.0;
                     request.setAttribute("carrito", listaCarrito);
-                    request.getRequestDispatcher("vista/Carrito.jsp").forward(request, response);
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        totalPagar = totalPagar + listaCarrito.get(i).getSubTotal();
+                    }
+                    request.setAttribute("totalPagar", totalPagar);
+                    request.getRequestDispatcher("./vista/Carrito.jsp").forward(request, response);
                     return;
                 case "default":
                     session.setAttribute("contador", listaCarrito.size());
@@ -111,15 +176,15 @@ public class SVProductos extends HttpServlet {
                         request.getRequestDispatcher("/vista/ComponenteCooler.jsp").forward(request, response);
                     } else if ("Memoriaram".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteMemoriaram.jsp").forward(request, response);
-                    }else if ("Mouse".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Mouse".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteMouse.jsp").forward(request, response);
-                    }else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Placamadre".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponentePlacaMadre.jsp").forward(request, response);
-                    }else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Procesador".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteProcesador.jsp").forward(request, response);
-                    }else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Teclado".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/ComponenteTeclado.jsp").forward(request, response);
-                    }else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
+                    } else if ("Monitores".equalsIgnoreCase(tipoProducto)) {
                         request.getRequestDispatcher("/vista/Monitores.jsp").forward(request, response);
                     }
                     return;

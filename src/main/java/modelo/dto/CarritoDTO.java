@@ -8,7 +8,7 @@ public class CarritoDTO {
     private int item;
     private int idProducto;
     private String nombre;
-    private String descripcion;
+    private String imagen;
     private double preciocompra;
     private int cantidad;
     private double subTotal;
@@ -16,11 +16,11 @@ public class CarritoDTO {
     public CarritoDTO() {
     }
 
-    public CarritoDTO(int item, int idProducto, String nombre, String descripcion, double preciocompra, int cantidad, double subTotal) {
+    public CarritoDTO(int item, int idProducto, String nombre, String imagen, double preciocompra, int cantidad, double subTotal) {
         this.item = item;
         this.idProducto = idProducto;
         this.nombre = nombre;
-        this.descripcion = descripcion;
+        this.imagen = imagen;
         this.preciocompra = preciocompra;
         this.cantidad = cantidad;
         this.subTotal = subTotal;
@@ -50,12 +50,12 @@ public class CarritoDTO {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public double getPreciocompra() {

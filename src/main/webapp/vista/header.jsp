@@ -70,7 +70,7 @@
                     <li><a href="<%=request.getContextPath()%>/vista/IniciarSesion.jsp">Inicie Sesión</a></li>
                 <% } %>
                 <li class="carrito">
-                    <a href="SVProductos?accion=Carrito">
+                    <a href="<%=request.getContextPath()%>/SVProductos?accion=Carrito">
                         <i class="fa fa-shopping-cart"></i>Carrito(<%= contador %>)
                     </a>
                 </li>

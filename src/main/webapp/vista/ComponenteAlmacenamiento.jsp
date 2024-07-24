@@ -30,7 +30,7 @@
                                 <h4 class="card-title">${p.getNombre()}</h4>
                                 <p class="card-text">S/.${p.getPrecio()}</p>
                                 <a href="SVProductos?accion=AgregarCarrito&id=${p.idProducto}&tipo=Almacenamiento" class="btn btn-outline-info">Añadir al carrito</a>
-                                <a href="#" class="btn btn-danger">Comprar</a>
+                                <a href="SVProductos?accion=Comprar&id=${p.idProducto}&tipo=Almacenamiento" class="btn btn-danger">Comprar</a>
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Auriculares</title>
+        <title>Carrito de compras</title>
         <link href="<%=request.getContextPath()%>/css/headerCSS.css" rel="stylesheet" type="text/css"/>
         <link href="<%=request.getContextPath()%>/css/footerCSS.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -127,6 +127,7 @@
                             <tr>
                                 <th>ITEM</th>
                                 <th>NOMBRE</th>
+                                <th>IMAGEN</th>
                                 <th>PRECIO</th>
                                 <th>CANT</th>
                                 <th>SUBTOTAL</th>
@@ -138,7 +139,18 @@
                                 <tr>
                                     <td>${car.getItem()}</td>
                                     <td>${car.getNombre()}</td>
+                                    <td>
+                                        <c:if test="${not empty car.imagen}">
+                                            <img src="${pageContext.request.contextPath}/img/${car.imagen}" width="100" height="100">
+                                        </c:if>
+                                    </td>
                                     <td>${car.getPreciocompra()}</td>
+                                    <td>${car.getCantidad()}</td>
+                                    <td>${car.getSubTotal()}</td>
+                                    <td>
+                                        <a href="">Eliminar</a>
+                                        <a href="">Editar</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -152,11 +164,11 @@
                         </div>
                         <div class="card-body">
                             <label>Subtotal:</label>
-                            <input type="text" readonly="" class="form-control">
+                            <input type="text" value="$.${totalPagar}0" readonly="" class="form-control">
                             <label>Descuento:</label>
-                            <input type="text" readonly="" class="form-control">
+                            <input type="text" value="$.0.00" readonly="" class="form-control">
                             <label>Total Pagar:</label>
-                            <input type="text" readonly="" class="form-control">
+                            <input type="text" value="$.${totalPagar}0" readonly="" class="form-control">
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn btn-info btn-block">Realiza Pago</a>
