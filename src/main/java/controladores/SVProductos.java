@@ -17,6 +17,7 @@ import modelo.dto.ProductoDTO;
 public class SVProductos extends HttpServlet {
 
     ProductosDAO prodao = new ProductosDAO();
+    ProductoDTO p = new ProductoDTO();
     List<ProductoDTO> productos = new ArrayList<>();
     int item;
     double totalPagar = 0;
@@ -59,7 +60,7 @@ public class SVProductos extends HttpServlet {
             switch (accion != null ? accion : "default") {
                 case "AgregarCarrito":
                     int idp = Integer.parseInt(request.getParameter("id"));
-                    ProductoDTO p = prodao.listarId(idp);
+                    p = prodao.listarId(idp);
                     item = listaCarrito.size() + 1;
                     CarritoDTO car = new CarritoDTO();
                     car.setItem(item);
@@ -96,7 +97,7 @@ public class SVProductos extends HttpServlet {
                 case "Carrito":
                     totalPagar = 0.0;
                     request.setAttribute("carrito", listaCarrito);
-                    request.getRequestDispatcher("/vista/Carrito.jsp").forward(request, response);
+                    request.getRequestDispatcher("vista/Carrito.jsp").forward(request, response);
                     return;
                 case "default":
                     session.setAttribute("contador", listaCarrito.size());
