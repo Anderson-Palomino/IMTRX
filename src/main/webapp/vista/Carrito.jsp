@@ -149,7 +149,8 @@
                                     <td>${car.getCantidad()}</td>
                                     <td>${car.getSubTotal()}</td>
                                     <td>
-                                        <button id="btnDelete" type="button" class="btnDelete" data-id="${car.getIdProducto()}">Eliminar</button>
+                                        <input type="hidden" id="idp" value="${car.getIdProducto()}">
+                                        <a href="#" id="btnDelete">Eliminar</a>
                                     </td>
                                 </tr>
                             </c:forEach>
