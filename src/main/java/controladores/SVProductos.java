@@ -155,6 +155,22 @@ public class SVProductos extends HttpServlet {
                         request.getRequestDispatcher("/vista/Monitores.jsp").forward(request, response);
                     }
                     return;
+
+                case "Delete":
+                    int idproducto = Integer.parseInt(request.getParameter("idp"));
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        if (listaCarrito.get(i).getIdProducto() == idproducto) {
+                            listaCarrito.remove(i);
+                            break; // Salir del bucle después de eliminar el producto
+                        }
+                    }
+                    session.setAttribute("listaCarrito", listaCarrito);
+                    session.setAttribute("contador", listaCarrito.size());
+                    request.setAttribute("carrito", listaCarrito);
+                    request.setAttribute("totalPagar", listaCarrito.stream().mapToDouble(CarritoDTO::getSubTotal).sum());
+                    request.getRequestDispatcher("./vista/Carrito.jsp").forward(request, response);
+                    break;
+
                 case "Carrito":
                     totalPagar = 0.0;
                     request.setAttribute("carrito", listaCarrito);

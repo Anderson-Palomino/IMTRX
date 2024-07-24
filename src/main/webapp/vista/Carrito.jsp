@@ -135,6 +135,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <tbody>
                             <c:forEach var="car" items="${carrito}">
                                 <tr>
                                     <td>${car.getItem()}</td>
@@ -148,11 +149,12 @@
                                     <td>${car.getCantidad()}</td>
                                     <td>${car.getSubTotal()}</td>
                                     <td>
-                                        <a href="">Eliminar</a>
-                                        <a href="">Editar</a>
+                                        <button id="btnDelete" type="button" class="btnDelete" data-id="${car.getIdProducto()}">Eliminar</button>
                                     </td>
                                 </tr>
                             </c:forEach>
+                        </tbody>
+
                         </tbody>
                     </table>
 
@@ -178,6 +180,8 @@
                 </div>
             </div>
         </div>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
     </body>
     <jsp:include page="footer.jsp" />
 </html>
