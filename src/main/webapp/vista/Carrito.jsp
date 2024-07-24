@@ -150,7 +150,7 @@
                                     <td>${car.getSubTotal()}</td>
                                     <td>
                                         <input type="hidden" id="idp" value="${car.getIdProducto()}">
-                                        <a href="#" id="btnDelete">Eliminar</a>
+                                        <a href="#" id="btnDelete" onclick="documentGa(${car.getIdProducto()})">Eliminar</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -182,7 +182,7 @@
             </div>
         </div>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="../js/funciones.js" type="text/javascript"></script>
+        <script src="js/funciones.js" type="text/javascript"></script>
     </body>
     <jsp:include page="footer.jsp" />
 </html>
